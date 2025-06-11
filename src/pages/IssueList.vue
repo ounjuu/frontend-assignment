@@ -153,28 +153,25 @@ export default {
       }
     },
 
-    async onUserChangeHandler(issue, newUserId) {
-      if (this.isUserChangeDisabled(issue)) {
-        alert('완료 또는 취소된 이슈는 담당자를 변경할 수 없습니다.')
+    async onStatusChangeHandler(issue, newStatus) {
+      if (this.isStatusChangeDisabled(issue)) {
+        alert('완료 또는 취소된 이슈는 상태를 변경할 수 없습니다.')
+        return
+      }
+
+      // 담당자가 없으면 PENDING만 선택 가능하게 강제
+      if (!issue.user && newStatus !== 'PENDING') {
+        alert('담당자가 없으면 상태는 PENDING만 선택 가능합니다.')
         return
       }
 
       try {
-        // 실제 API 호출
-        await updateIssueUser(issue.id, newUserId || null)
-
-        // 로컬 상태 변경
-        const newUser = this.users.find((u) => u.id === Number(newUserId)) || null
-        issue.user = newUser
-
-        if (newUser && issue.status === 'PENDING') {
-          issue.status = 'IN_PROGRESS'
-        }
-
-        alert('담당자가 변경되었습니다.')
+        await updateIssueStatus(issue.id, newStatus)
+        issue.status = newStatus
+        alert('상태가 변경되었습니다.')
       } catch (error) {
         console.error(error)
-        alert('담당자 변경 실패')
+        alert('상태 변경 실패')
       }
     },
   },
