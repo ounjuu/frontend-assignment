@@ -90,7 +90,9 @@ export default {
   methods: {
     async loadData() {
       try {
+        console.log('selectedStatus:', this.selectedStatus)
         this.issues = await fetchIssues(this.selectedStatus || null)
+        console.log('issues loaded:', this.issues)
         this.users = await fetchUsers()
       } catch (error) {
         console.error(error)
@@ -98,6 +100,7 @@ export default {
       }
     },
     onStatusChange(status) {
+      console.log('selected status:', status)
       this.selectedStatus = status
       this.loadData()
     },
@@ -141,15 +144,11 @@ export default {
       }
 
       try {
-        // 실제 API 호출
-        await updateIssueStatus(issue.id, newStatus)
-
-        // 로컬 상태 변경
-        issue.status = newStatus
-        alert('상태가 변경되었습니다.')
+        this.issues = await fetchIssues(this.selectedStatus || null)
+        this.users = await fetchUsers()
       } catch (error) {
         console.error(error)
-        alert('상태 변경 실패')
+        alert('데이터 불러오기 실패')
       }
     },
 
