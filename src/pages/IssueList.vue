@@ -183,25 +183,55 @@ export default {
 
 <style scoped>
 button {
-  margin-right: 8px;
-  padding: 4px 8px;
+  margin-right: 10px;
+  padding: 6px 14px;
   cursor: pointer;
+  border: 2px solid #6a4baf; /* 보라색 테두리 */
+  background-color: transparent;
+  color: #6a4baf;
+  font-weight: 600;
+  border-radius: 6px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 button.active {
-  background-color: #007bff;
+  background-color: #6a4baf;
+  color: white;
+  box-shadow: 0 4px 8px rgba(106, 75, 175, 0.3);
+}
+button:hover:not(.active) {
+  background-color: #a289e8;
   color: white;
 }
+
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 16px;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* 행 간격 주기 */
+  margin-top: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4b3b9c;
 }
+
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: none;
+  padding: 14px 12px;
+  text-align: left;
+  background-color: #f9f7ff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(106, 75, 175, 0.1);
 }
-tr:hover {
-  background-color: #f0f0f0;
+
+th {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #523a97;
+}
+
+tr:hover td {
+  background-color: #e0d9f8;
+  transition: background-color 0.3s ease;
 }
 </style>
