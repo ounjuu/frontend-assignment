@@ -36,7 +36,7 @@
         >
           <td>{{ issue.title }}</td>
           <td>{{ issue.status }}</td>
-          <td>{{ getAssigneeName(issue.assigneeId) }}</td>
+          <td>{{ issue.user ? issue.user.name : '담당자 없음' }}</td>
           <td>{{ issue.createdAt }}</td>
         </tr>
       </tbody>
@@ -75,10 +75,6 @@ export default {
     async loadData() {
       this.issues = await fetchIssues()
       this.users = await fetchUsers()
-    },
-    getAssigneeName(assigneeId) {
-      const user = this.users.find((u) => u.id === assigneeId)
-      return user ? user.name : '알 수 없음'
     },
     goToIssueDetail(issueId) {
       this.$router.push(`/issues/${issueId}`)
