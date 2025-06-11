@@ -1,6 +1,7 @@
 // src/api/api.js
 
 import { issues, users } from '../data/mockData'
+import axios from 'axios'
 
 // 개발 모드에 따라 실제 서버 호출 또는 mock 데이터 반환
 const mode = import.meta.env.VITE_MODE || 'DEV'
@@ -26,3 +27,12 @@ export async function fetchUsers() {
     return res.json()
   }
 }
+
+const api = axios.create({
+  baseURL: 'http://localhost:8080', // 운영 모드 base URL
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+export default api

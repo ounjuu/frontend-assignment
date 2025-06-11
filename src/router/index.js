@@ -14,11 +14,14 @@ const routes = [
   },
   {
     path: '/issues/new',
+    name: 'IssueCreate',
     component: IssueForm,
   },
   {
     path: '/issues/:id',
+    name: 'IssueEdit',
     component: IssueForm,
+    props: (route) => ({ issueId: route.params.id }),
   },
 ]
 

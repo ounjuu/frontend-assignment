@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { users, issues } from '@/data/mockData.js' // mock 데이터 직접 import
+import { users, issues } from '@/data/mockData.js'
 
 export default {
   name: 'IssueForm',
@@ -96,6 +96,7 @@ export default {
     },
   },
   mounted() {
+    console.log('issueId:', this.issueId)
     this.loadIssue()
   },
 }
